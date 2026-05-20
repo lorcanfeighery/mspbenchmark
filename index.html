@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MSP Benchmark Scorecard</title>
+    <link rel="stylesheet" href="styles.css?v=7" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="MSP Benchmark Scorecard home">
+        <span class="brand-mark">MSP</span>
+        <span>Benchmark Scorecard</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#scorecard">Scorecard</a>
+        <a href="#results">Results</a>
+        <a href="/assets/msp-metrics-playbook.pdf" download>Full report</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">UK &amp; Ireland MSP performance benchmark</p>
+          <h1>Benchmark Your MSP Against Top-Performing UK &amp; Irish Providers</h1>
+          <p class="hero-text">
+            Use this free benchmark tool to see where your MSP sits across profitability,
+            revenue quality, pricing, service efficiency, client retention, and security
+            maturity. Enter your metrics and receive instant, practical guidance based on
+            recognised MSP performance benchmarks.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#scorecard">Start Benchmark</a>
+            <a class="button secondary" href="/assets/msp-metrics-playbook.pdf" download>
+              Download Full MSP Metrics Playbook
+            </a>
+          </div>
+          <p class="trust-note">
+            No login required. No contact details required. Your results are generated instantly.
+          </p>
+        </div>
+        <aside class="hero-panel" aria-label="Benchmark preview">
+          <div class="panel-score">
+            <span>Your MSP Benchmark Score</span>
+            <strong id="heroScore">0 / 100</strong>
+          </div>
+          <div class="mini-bars" aria-hidden="true">
+            <span style="--bar: 72%"></span>
+            <span style="--bar: 48%"></span>
+            <span style="--bar: 86%"></span>
+            <span style="--bar: 64%"></span>
+          </div>
+          <p>
+            Live scoring across 12 practical MSP metrics, with benchmark context and improvement
+            guidance.
+          </p>
+        </aside>
+      </section>
+
+      <section class="workspace" id="scorecard">
+        <div class="form-column">
+          <div class="section-heading">
+            <p class="eyebrow">Guided inputs</p>
+            <h2>Answer a few questions, get a useful business health check.</h2>
+            <p>
+              Enter approximate figures if you are unsure. The scorecard updates as you go and
+              keeps incomplete metrics in a waiting state.
+            </p>
+          </div>
+
+          <div class="sample-row">
+            <button class="button sample-btn" id="loadSample" type="button">Load example MSP</button>
+            <button class="button sample-btn clear-btn" id="clearAll" type="button">Clear all values</button>
+          </div>
+
+          <div class="privacy-note">
+            <strong>Privacy note</strong>
+            <span>
+              This tool does not require your contact details. Your inputs are used only to
+              generate your benchmark results in this browser session. Your data is not stored or
+              submitted to a server.
+            </span>
+          </div>
+
+          <div class="progress-card">
+            <div>
+              <span class="muted">Completion</span>
+              <strong id="progressLabel">0 of 15 inputs</strong>
+            </div>
+            <div class="progress-track" aria-hidden="true"><span id="progressBar"></span></div>
+          </div>
+
+          <form id="benchmarkForm" novalidate>
+            <section class="input-section">
+              <button class="section-toggle" type="button" aria-expanded="true">
+                <span>1. Business Profile</span>
+                <span class="toggle-icon">+</span>
+              </button>
+              <div class="section-body">
+                <div class="field-grid">
+                  <label>
+                    <span>Annual revenue</span>
+                    <small>Use your latest annual revenue figure.</small>
+                    <input id="annualRevenue" inputmode="decimal" type="number" min="0" step="1000" placeholder="e.g. 3500000" />
+                  </label>
+                  <label>
+                    <span>Number of employees</span>
+                    <small>Total people in the business.</small>
+                    <input id="employees" inputmode="numeric" type="number" min="0" step="1" placeholder="e.g. 24" />
+                  </label>
+                  <label>
+                    <span>Technical service delivery employees</span>
+                    <small>Engineers, service desk, project delivery and technical delivery roles.</small>
+                    <input id="technicians" inputmode="numeric" type="number" min="0" step="1" placeholder="e.g. 12" />
+                  </label>
+                  <label>
+                    <span>MSP size band</span>
+                    <small>Auto-selected from revenue, but you can override it.</small>
+                    <select id="sizeBand">
+                      <option value="small">Small MSP: under £2m annual revenue</option>
+                      <option value="mid">Mid-sized MSP: £2m to £10m annual revenue</option>
+                      <option value="large">Larger MSP: £10m+ annual revenue</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+            </section>
+
+            <section class="input-section">
+              <button class="section-toggle" type="button" aria-expanded="true">
+                <span>2. Financial Performance</span>
+                <span class="toggle-icon">+</span>
+              </button>
+              <div class="section-body">
+                <div class="field-grid">
+                  <label>
+                    <span>Gross margin %</span>
+                    <small>Include service labour and tool costs in COGS where possible.</small>
+                    <input id="grossMargin" inputmode="decimal" type="number" min="0" max="100" step="0.1" placeholder="e.g. 41" />
+                    <div class="input-hint" id="hint-grossMargin"></div>
+                  </label>
+                  <label>
+                    <span>EBITDA / net profit margin %</span>
+                    <small>Use adjusted EBITDA or net profit margin if EBITDA is unavailable.</small>
+                    <input id="ebitdaMargin" inputmode="decimal" type="number" min="0" max="100" step="0.1" placeholder="e.g. 16" />
+                    <div class="input-hint" id="hint-ebitdaMargin"></div>
+                  </label>
+                  <label>
+                    <span>Recurring revenue %</span>
+                    <small>Annual recurring revenue as a share of total revenue.</small>
+                    <input id="recurringRevenue" inputmode="decimal" type="number" min="0" max="100" step="0.1" placeholder="e.g. 68" />
+                    <div class="input-hint" id="hint-recurringRevenue"></div>
+                  </label>
+                </div>
+              </div>
+            </section>
+
+            <section class="input-section">
+              <button class="section-toggle" type="button" aria-expanded="true">
+                <span>3. Pricing &amp; Client Base</span>
+                <span class="toggle-icon">+</span>
+              </button>
+              <div class="section-body">
+                <div class="field-grid">
+                  <label>
+                    <span>Monthly recurring revenue</span>
+                    <small>Current contracted monthly recurring revenue.</small>
+                    <input id="mrr" inputmode="decimal" type="number" min="0" step="100" placeholder="e.g. 225000" />
+                  </label>
+                  <label>
+                    <span>Supported users / seats</span>
+                    <small>Users covered by recurring managed service agreements.</small>
+                    <input id="supportedUsers" inputmode="numeric" type="number" min="0" step="1" placeholder="e.g. 2800" />
+                  </label>
+                  <label>
+                    <span>Active clients</span>
+                    <small>Clients with active recurring service relationships.</small>
+                    <input id="activeClients" inputmode="numeric" type="number" min="0" step="1" placeholder="e.g. 46" />
+                  </label>
+                </div>
+                <div class="derived-grid" aria-live="polite">
+                  <span>
+                    <span class="derived-label">
+                      AISP / PUPM
+                      <span class="metric-info">
+                        <button class="info-button" type="button" aria-label="What is AISP / PUPM?">i</button>
+                        <span class="info-popover" role="tooltip">
+                          <strong>Average Invoice per Seat</strong>
+                          <span>Also called Per User Per Month (PUPM). Your MRR divided by supported users — the average monthly recurring charge per end user. One of the most widely used MSP pricing benchmarks.</span>
+                        </span>
+                      </span>
+                    </span>
+                    <strong id="derivedAisp">Waiting</strong>
+                  </span>
+                  <span>
+                    <span class="derived-label">
+                      Average MRR per client
+                      <span class="metric-info">
+                        <button class="info-button" type="button" aria-label="What is average MRR per client?">i</button>
+                        <span class="info-popover" role="tooltip">
+                          <strong>Average MRR per client</strong>
+                          <span>Monthly recurring revenue divided by active clients. Shows the typical monthly value of each client relationship.</span>
+                        </span>
+                      </span>
+                    </span>
+                    <strong id="derivedMrrClient">Waiting</strong>
+                  </span>
+                  <span>
+                    <span class="derived-label">
+                      Revenue per employee
+                      <span class="metric-info">
+                        <button class="info-button" type="button" aria-label="What is revenue per employee?">i</button>
+                        <span class="info-popover" role="tooltip">
+                          <strong>Revenue per employee</strong>
+                          <span>Annual revenue divided by total headcount. A measure of overall productivity — higher values indicate the business is growing revenue efficiently relative to its size.</span>
+                        </span>
+                      </span>
+                    </span>
+                    <strong id="derivedRevenueEmployee">Waiting</strong>
+                  </span>
+                  <span>
+                    <span class="derived-label">
+                      Revenue per technician
+                      <span class="metric-info">
+                        <button class="info-button" type="button" aria-label="What is revenue per technician?">i</button>
+                        <span class="info-popover" role="tooltip">
+                          <strong>Revenue per technician</strong>
+                          <span>Annual revenue divided by technical delivery staff only. Shows how much revenue each engineer or service desk role is supporting — a useful gauge of service team leverage.</span>
+                        </span>
+                      </span>
+                    </span>
+                    <strong id="derivedRevenueTech">Waiting</strong>
+                  </span>
+                </div>
+              </div>
+            </section>
+
+            <section class="input-section">
+              <button class="section-toggle" type="button" aria-expanded="true">
+                <span>4. Service Efficiency</span>
+                <span class="toggle-icon">+</span>
+              </button>
+              <div class="section-body">
+                <div class="field-grid">
+                  <label>
+                    <span>Managed endpoints</span>
+                    <small>Workstations, servers and other managed endpoint assets.</small>
+                    <input id="endpoints" inputmode="numeric" type="number" min="0" step="1" placeholder="e.g. 2450" />
+                  </label>
+                  <label>
+                    <span>Monthly ticket volume</span>
+                    <small>Total monthly support tickets, including recurring client requests.</small>
+                    <input id="tickets" inputmode="numeric" type="number" min="0" step="1" placeholder="e.g. 1450" />
+                  </label>
+                </div>
+                <div class="derived-grid" aria-live="polite">
+                  <span>Endpoints per technician: <strong id="derivedEndpointsTech">Waiting</strong></span>
+                  <span>Tickets per endpoint per month: <strong id="derivedTicketsEndpoint">Waiting</strong></span>
+                </div>
+              </div>
+            </section>
+
+            <section class="input-section">
+              <button class="section-toggle" type="button" aria-expanded="true">
+                <span>5. Retention &amp; Security Maturity</span>
+                <span class="toggle-icon">+</span>
+              </button>
+              <div class="section-body">
+                <div class="field-grid">
+                  <label>
+                    <span>Annual logo churn %</span>
+                    <small>Percentage of clients lost over the last 12 months.</small>
+                    <input id="logoChurn" inputmode="decimal" type="number" min="0" max="100" step="0.1" placeholder="e.g. 7" />
+                    <div class="input-hint" id="hint-logoChurn"></div>
+                  </label>
+                  <label>
+                    <span>Average services per client</span>
+                    <small>Average number of recurring services used by each client.</small>
+                    <input id="servicesPerClient" inputmode="decimal" type="number" min="0" step="0.1" placeholder="e.g. 4.5" />
+                    <div class="input-hint" id="hint-servicesPerClient"></div>
+                  </label>
+                  <label>
+                    <span>Security attach rate %</span>
+                    <small>
+                      Clients using one or more managed security services such as EDR/MDR, email
+                      security, backup/BCDR, security awareness training, vulnerability scanning,
+                      or similar.
+                    </small>
+                    <input id="securityAttach" inputmode="decimal" type="number" min="0" max="100" step="0.1" placeholder="e.g. 64" />
+                    <div class="input-hint" id="hint-securityAttach"></div>
+                  </label>
+                </div>
+              </div>
+            </section>
+          </form>
+
+          <div id="warnings" class="warnings" aria-live="polite"></div>
+        </div>
+
+        <aside class="results-preview" aria-label="Sticky score preview">
+          <span class="muted">Live score</span>
+          <strong id="stickyScore">0 / 100</strong>
+          <p id="stickyInterpretation">Enter your metrics to build a benchmark view.</p>
+          <a class="button primary full" href="#results">View Results</a>
+        </aside>
+      </section>
+
+      <section class="results" id="results">
+        <div class="section-heading">
+          <p class="eyebrow">Instant results</p>
+          <h2>Your MSP Benchmark Scorecard</h2>
+          <p>
+            The dashboard compares your current inputs against practical benchmark ranges for
+            UK and Irish MSPs. It is designed as a discussion aid, not a rigid audit.
+          </p>
+        </div>
+
+        <div class="score-grid">
+          <div class="overall-card">
+            <span class="muted">Your MSP Benchmark Score</span>
+            <strong id="overallScore">0 / 100</strong>
+            <p id="overallInterpretation">Enter your metrics to calculate your score.</p>
+            <div class="score-meter" aria-hidden="true"><span id="scoreMeterFill"></span></div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-head">
+              <div>
+                <span class="muted">Category profile</span>
+                <strong>Performance radar</strong>
+              </div>
+            </div>
+            <svg id="radarChart" viewBox="0 0 260 260" role="img" aria-label="Category score radar chart"></svg>
+          </div>
+        </div>
+
+        <div class="actions-row">
+          <button class="button primary" id="downloadPdf" type="button">Download my benchmark report</button>
+          <a class="button secondary" href="/assets/msp-metrics-playbook.pdf" download>Download Full MSP Metrics Playbook</a>
+          <button class="button secondary" id="copySummary" type="button">Copy summary</button>
+        </div>
+        <p class="supporting-copy">
+          For the full methodology, benchmark detail, and source notes, download the complete MSP
+          Metrics Playbook.
+        </p>
+
+        <div class="insights-grid">
+          <section class="insight-card">
+            <h3>Top 3 strengths</h3>
+            <ul id="strengthsList"></ul>
+          </section>
+          <section class="insight-card">
+            <h3>Top 3 improvement areas</h3>
+            <ul id="improvementsList"></ul>
+          </section>
+        </div>
+
+        <div class="category-grid" id="categoryGrid"></div>
+        <div class="results-subsection-heading">
+          <p class="eyebrow">Detailed benchmark view</p>
+          <h2>Individual Metrics</h2>
+          <p>
+            Review each metric in more detail, including your result, the benchmark band, the
+            calculation method, and practical guidance.
+          </p>
+        </div>
+        <div class="metric-grid" id="metricGrid"></div>
+      </section>
+
+      <section class="cta" id="schedule">
+        <div>
+          <p class="eyebrow">Benchmark review</p>
+          <h2>Want to talk through your results?</h2>
+          <p>
+            If you would like to understand what your benchmark results might mean in practice,
+            you can schedule a short discussion with Lorcan. The goal is to review where your MSP
+            appears strong, where margin or efficiency may be leaking, and what practical steps
+            could improve performance.
+          </p>
+        </div>
+        <a class="button primary" href="https://calendly.com/lorcan-feighery-kaseya/30min">Schedule a Benchmark Review</a>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Benchmark guidance is directional and based on recognised MSP operating benchmarks. Some
+        source ranges are global, self-reported, or proxy-based where UK/Ireland MSP-specific data
+        is limited.
+      </p>
+    </footer>
+
+    <script src="app.js?v=10"></script>
+  </body>
+</html>
