@@ -1,4 +1,4 @@
-const STATUS_POINTS = {
+﻿const STATUS_POINTS = {
   green: 8.33,
   amber: 4.16,
   red: 1.5,   // below benchmark but not zero — a 10% EBITDA is still a real business
@@ -72,6 +72,8 @@ const definitions = {
       "Review pricing, service gross margin, tool costs, labour utilisation, low-margin customers, and underpriced fixed-fee agreements.",
     recommendation:
       "Review fixed-fee agreements, labour utilisation, gross margin by service line, tool costs, and low-margin customers.",
+    strength:
+      "An EBITDA margin at this level reflects genuine pricing discipline and delivery control — one of the clearest indicators of a well-run, sustainable MSP.",
   },
   grossMargin: {
     name: "Gross Margin",
@@ -89,6 +91,8 @@ const definitions = {
       "Review labour allocation, service packaging, support workload, vendor/tool costs, and contract profitability. Ensure service labour is included in COGS.",
     recommendation:
       "Review delivery labour in COGS, service package margin, support workload and vendor or tool costs.",
+    strength:
+      "Gross margin at this level provides a strong foundation for sustainable EBITDA and real capacity to invest in growth without margin pressure.",
   },
   recurringRevenue: {
     name: "Recurring Revenue %",
@@ -106,6 +110,8 @@ const definitions = {
       "Increase managed service coverage, reduce reliance on one-off projects, standardise recurring packages, and expand recurring security, backup, and compliance services.",
     recommendation:
       "Increase managed service coverage and reduce reliance on one-off project revenue where possible.",
+    strength:
+      "A recurring revenue base at this level delivers strong planning confidence, resilience through downturns, and better business valuation multiples.",
   },
   revenueEmployee: {
     name: "Revenue per Employee",
@@ -123,6 +129,8 @@ const definitions = {
       "Improve automation, standardise service delivery, review low-value manual work, increase pricing, and improve account expansion.",
     recommendation:
       "Review pricing, manual workload, automation coverage and account expansion to improve revenue productivity.",
+    strength:
+      "Revenue per employee at this level indicates an efficient, productive team — the business is scaling without adding disproportionate headcount.",
   },
   revenueTechnician: {
     name: "Revenue per Technician",
@@ -140,6 +148,8 @@ const definitions = {
       "Improve RMM automation, documentation, ticket deflection, self-service, standardisation, and client environment consistency.",
     recommendation:
       "Improve automation, documentation, self-service and client environment consistency across the base.",
+    strength:
+      "Revenue per technician at this level shows strong service team leverage — each technical role is supporting a healthy share of revenue without over-reliance on headcount.",
   },
   endpointsTechnician: {
     name: "Endpoints per Technician",
@@ -157,6 +167,8 @@ const definitions = {
       "Standardise client environments, reduce preventable tickets, improve monitoring, automate common fixes, improve documentation, and reduce tool fragmentation.",
     recommendation:
       "Analyse repeat tickets, automate common fixes, standardise environments and improve technical documentation.",
+    strength:
+      "Managing this many endpoints per technician reflects strong automation maturity and the kind of standardised client environments that keep reactive workload in check.",
   },
   aisp: {
     name: "AISP / PUPM",
@@ -175,6 +187,8 @@ const definitions = {
       "Review package structure, minimum service standards, security attachment, backup coverage, compliance services, and whether fixed-fee agreements reflect actual delivery effort.",
     recommendation:
       "Review package structure, minimum service standards, security baseline and whether monthly fees reflect delivery effort.",
+    strength:
+      "An AISP at this level reflects well-packaged services and pricing that captures genuine value — reducing margin pressure and supporting profitable, scalable growth.",
   },
   avgMrrClient: {
     name: "Average MRR per Client",
@@ -186,6 +200,8 @@ const definitions = {
       "Set minimum account thresholds, expand wallet share, improve packaging, target better-fit clients, and review low-value high-noise accounts.",
     recommendation:
       "Review low-value high-noise accounts, minimum account thresholds, wallet share and better-fit client targeting.",
+    strength:
+      "Average MRR per client at this level indicates well-sized accounts generating meaningful recurring value — the kind of client base worth investing in and retaining.",
   },
   logoChurn: {
     name: "Annual Logo Churn",
@@ -203,6 +219,8 @@ const definitions = {
       "Introduce structured QBRs, track customer health, improve onboarding, communicate value more clearly, and identify at-risk clients early.",
     recommendation:
       "Introduce customer health tracking, structured QBRs and early intervention for at-risk clients.",
+    strength:
+      "A churn rate at this level is a strong signal of consistent service delivery and a client base that genuinely values the relationship — a key indicator of long-term business quality.",
   },
   ticketsEndpoint: {
     name: "Tickets per Endpoint per Month",
@@ -220,6 +238,8 @@ const definitions = {
       "Analyse repeat ticket categories, automate common fixes, improve patching, standardise client stacks, improve user education, and address root causes.",
     recommendation:
       "Analyse repeat ticket categories, address root causes, improve patching and automate common fixes.",
+    strength:
+      "A ticket rate at this level reflects stable, well-managed client environments — freeing your team from reactive noise and giving them capacity for higher-value work.",
   },
   servicesClient: {
     name: "Services per Client",
@@ -237,6 +257,8 @@ const definitions = {
       "Map white space across the client base, identify missing core services, create standard service bundles, and use QBRs to align services to client risk and business goals.",
     recommendation:
       "Map white space across each account and identify clients missing core services such as backup, endpoint security, email security, security awareness or vulnerability testing.",
+    strength:
+      "Services per client at this level indicates strong wallet share and meaningful account embeddedness — both of which support retention and make client relationships harder to lose.",
   },
   securityAttach: {
     name: "Security Attach Rate",
@@ -254,6 +276,8 @@ const definitions = {
       "Define a minimum security baseline, review clients without core protection, package security into standard offerings, and educate clients on current cyber, compliance, and insurance expectations.",
     recommendation:
       "Define a minimum security baseline and review clients without core protection in place.",
+    strength:
+      "A security attach rate at this level shows that protective services are embedded into your standard client offering — a mark of MSP maturity and a solid recurring revenue foundation.",
   },
 };
 
@@ -323,7 +347,7 @@ const METRIC_FEEDBACK = {
   avgMrrClient: ({ formattedValue, status, bandLabel }) => {
     if (status === "green") return `Your average MRR per client of ${formattedValue} is strong for ${bandLabel} MSP — you are working with well-sized accounts that generate meaningful recurring value.`;
     if (status === "amber") return `Your average MRR per client of ${formattedValue} is in the developing range. This may reflect a mix of account sizes, with some smaller accounts pulling the average down.`;
-    return `Your average MRR per client of ${formattedValue} is currently below the benchmark for ${bandLabel} MSP. This often reflects a client mix that includes smaller, higher-effort accounts. Reviewing account size thresholds can improve both margin and service efficiency.`;
+    return `Your average MRR per client of ${formattedValue} suggests a smaller-account client mix — this may be intentional, but it typically requires strong standardisation and tight service boundaries to remain profitable at scale. Consider whether your pricing, service scope, or minimum client size could be adjusted over time.`;
   },
   logoChurn: ({ formattedValue, status, bandLabel }) => {
     if (status === "green") return `Your annual logo churn of ${formattedValue} is low for ${bandLabel} MSP — strong retention is one of the clearest signs of consistent client value delivery.`;
@@ -894,6 +918,7 @@ function buildState() {
       status: scoreHigher(positiveOrNull(endpointsTechnician), endpointsTechBench.green, endpointsTechBench.amber),
       benchmark: endpointsTechBench.benchmark,
       bands: endpointsTechBench.bands,
+      labelMap: { green: "High leverage", amber: "Moderate leverage", red: "Capacity pressure", waiting: "Waiting for input" },
     },
     {
       id: "aisp",
@@ -922,6 +947,7 @@ function buildState() {
       status: scoreLower(positiveOrZeroOrNull(ticketsEndpoint), ticketsEndpointBench.green, ticketsEndpointBench.amber),
       benchmark: ticketsEndpointBench.benchmark,
       bands: ticketsEndpointBench.bands,
+      caveat: "Note: this metric is most meaningful where ticket logging is consistent. MSPs that log every alert, automation, and proactive task will naturally show a higher rate than those with lighter logging discipline — compare directionally rather than literally.",
     },
     {
       id: "servicesClient",
@@ -1147,9 +1173,10 @@ function renderMetrics(state) {
               </div>
               <div class="metric-result">${formatValue(metric.value, metric.unit)}</div>
             </div>
-            <span class="badge ${metric.status}">${statusLabel(metric.status)}</span>
+            <span class="badge ${metric.status}">${(metric.labelMap && metric.labelMap[metric.status]) || statusLabel(metric.status)}</span>
           </header>
           <p class="metric-benchmark"><strong>Benchmark:</strong> ${benchmark}</p>
+          ${metric.caveat ? `<p class="metric-caveat">${metric.caveat}</p>` : ""}
           <details>
             <summary>View guidance</summary>
             <div>
@@ -1201,7 +1228,7 @@ function renderInsights(state) {
     .slice(0, 3);
 
   document.getElementById("strengthsList").innerHTML = strengths.length
-    ? strengths.map((metric) => `<li><strong>${metric.name}</strong> - ${statusLabel(metric.status)}</li>`).join("")
+    ? strengths.map((metric) => `<li><strong>${metric.name}</strong> — ${statusLabel(metric.status)}. ${metric.strength || ""}</li>`).join("")
     : "<li>Waiting for enough inputs to identify strengths.</li>";
 
   document.getElementById("improvementsList").innerHTML = improvements.length
@@ -1283,7 +1310,7 @@ function renderHints(state) {
     if (!metric || metric.status === "waiting") {
       el.innerHTML = `<span class="hint-range">${label}</span>`;
     } else {
-      el.innerHTML = `<span class="hint-status ${metric.status}">${statusLabel(metric.status)}</span><span class="hint-range">${label}</span>`;
+      el.innerHTML = `<span class="hint-status ${metric.status}">${(metric.labelMap && metric.labelMap[metric.status]) || statusLabel(metric.status)}</span><span class="hint-range">${label}</span>`;
     }
   });
 }
@@ -1348,184 +1375,307 @@ function temporaryButtonText(id, text) {
   }, 1500);
 }
 
-function generateReportPdf() {
+async function generateReportPdf() {
   const state = latestState;
+  if (!window.jspdf) {
+    alert("PDF library is still loading — please try again in a moment.");
+    return;
+  }
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: "p", unit: "mm", format: "a4" });
+
+  const PW = 210, PH = 297, ML = 14, MR = 196, CW = MR - ML;
+
+  const C = {
+    navy: "#1F4E79", white: "#FFFFFF", text: "#172033", muted: "#5B6475",
+    line: "#E1E7EF", bg: "#F7F9FC", scoreBg: "#EEF3F8",
+    green: "#2E7D5B", greenBg: "#E7F3EE",
+    amber: "#C9822B", amberBg: "#FBF0DF",
+    red:   "#B85C5C", redBg:   "#F8E8E8",
+  };
+
+  function sC(s)  { return s==="green"?C.green  : s==="amber"?C.amber  : s==="red"?C.red  : C.muted; }
+  function sBg(s) { return s==="green"?C.greenBg: s==="amber"?C.amberBg: s==="red"?C.redBg: "#EEEEEE"; }
+  function sForN(n) { return n===null?"waiting": n>=70?"green": n>=40?"amber": "red"; }
+  function lForN(n) { return n===null?"Waiting": n>=70?"Strong": n>=40?"Developing": "Below benchmark"; }
+
+  function rect(x, y, w, h, c)     { doc.setFillColor(c); doc.rect(x, y, w, h, "F"); }
+  function rrect(x, y, w, h, r, c) { doc.setFillColor(c); doc.roundedRect(x, y, w, h, r, r, "F"); }
+  function hline(y)                 { doc.setDrawColor(C.line); doc.setLineWidth(0.3); doc.line(ML, y, MR, y); }
+
+  function hBar(x, y, w, h, pct, c) {
+    rrect(x, y, w, h, h / 2, C.line);
+    if (pct > 0) rrect(x, y, Math.max(h, w * Math.min(pct, 100) / 100), h, h / 2, c);
+  }
+
+  function badge(label, cx, y, status) {
+    const bw = 32, bh = 5.5;
+    rrect(cx - bw / 2, y - 4, bw, bh, 1.5, sBg(status));
+    doc.setFont("helvetica", "bold"); doc.setFontSize(7); doc.setTextColor(sC(status));
+    doc.text(label, cx, y, { align: "center" });
+  }
+
+  function drawHeader(sub) {
+    rect(0, 0, PW, 18, C.navy);
+    doc.setFont("helvetica", "bold"); doc.setFontSize(9); doc.setTextColor(C.white);
+    doc.text("MSP BENCHMARK SCORECARD", ML, 11);
+    doc.setFont("helvetica", "normal"); doc.setFontSize(8);
+    doc.text(sub, MR, 11, { align: "right" });
+  }
+
+  function drawFooter(n, total) {
+    rect(0, PH - 12, PW, 12, C.bg);
+    doc.setFont("helvetica", "normal"); doc.setFontSize(7); doc.setTextColor(C.muted);
+    doc.text("lorcan.feighery@kaseya.com  ·  MSP Benchmark Scorecard", ML, PH - 4.5);
+    doc.text(`Page ${n} of ${total}`, MR, PH - 4.5, { align: "right" });
+  }
+
+  // Capture radar chart SVG as PNG
+  let radarImg = null;
+  try {
+    const svgEl = document.getElementById("radarChart");
+    if (svgEl && svgEl.children.length > 0) {
+      radarImg = await svgToDataUrl(svgEl, 260, 260);
+    }
+  } catch (_) { /* skip if capture fails */ }
+
+  // ── PAGE 1: Executive Summary ─────────────────────────────────────────
+  drawHeader("Executive Summary");
+  let y = 26;
+
+  // Score block
+  const score = state.totalScore;
+  const scoreStatus = sForN(score);
+  const scoreColor  = sC(scoreStatus);
+  const scoreLabel  = score >= 70 ? "Strong overall performance"
+                    : score >= 40 ? "Developing — clear room to grow"
+                    : "Below benchmark — meaningful opportunities ahead";
+
+  doc.setFont("helvetica", "bold"); doc.setFontSize(38); doc.setTextColor(C.navy);
+  doc.text(String(score), ML, y + 11);
+  const numW = doc.getTextWidth(String(score));
+
+  doc.setFont("helvetica", "normal"); doc.setFontSize(16); doc.setTextColor(C.muted);
+  doc.text("/ 100", ML + numW + 3, y + 9);
+
+  doc.setFont("helvetica", "bold"); doc.setFontSize(10); doc.setTextColor(scoreColor);
+  doc.text(scoreLabel, ML + numW + 3, y + 17);
+
+  hBar(ML, y + 20, CW, 4, score, scoreColor);
+  y += 29;
+
+  doc.setFont("helvetica", "normal"); doc.setFontSize(8.5); doc.setTextColor(C.muted);
+  const interp = doc.splitTextToSize(scoreInterpretation(score, state.completedMetrics), CW);
+  doc.text(interp, ML, y);
+  y += interp.length * 3.6 + 8;
+
+  hline(y); y += 8;
+
+  // Two-column: category score bars (left) + radar chart (right)
+  const colLw = 97, colRx = ML + colLw + 9, colRw = CW - colLw - 9;
+  const secY = y;
+
+  doc.setFont("helvetica", "bold"); doc.setFontSize(11); doc.setTextColor(C.navy);
+  doc.text("Category Scores", ML, y);
+  y += 7;
+
+  state.categoryScores.forEach((cat) => {
+    const cs  = cat.score;
+    const cst = sForN(cs);
+    const cc  = sC(cst);
+    const catName = cat.name.replace("Pricing & Commercial Efficiency", "Pricing & Efficiency");
+
+    doc.setFont("helvetica", "bold"); doc.setFontSize(8); doc.setTextColor(C.text);
+    doc.text(catName, ML, y + 2);
+
+    hBar(ML, y + 4, colLw - 28, 3, cs === null ? 0 : cs, cc);
+
+    doc.setFont("helvetica", "bold"); doc.setFontSize(7); doc.setTextColor(cc);
+    doc.text(cs === null ? "—" : `${cs}%`, ML + colLw - 26, y + 3);
+
+    doc.setFont("helvetica", "normal"); doc.setFontSize(6.5); doc.setTextColor(cc);
+    doc.text(lForN(cs), ML + colLw - 26, y + 6.5);
+
+    y += 13;
+  });
+
+  // Radar chart on the right column
+  if (radarImg) {
+    doc.addImage(radarImg, "PNG", colRx, secY - 4, colRw, colRw);
+  }
+  y = Math.max(y, secY - 4 + colRw) + 6;
+
+  hline(y); y += 8;
+
+  // Strengths / Improvements two-column
+  const hw = CW / 2 - 4;
   const strengths = [...state.metrics]
-    .filter((metric) => metric.status !== "waiting")
+    .filter((m) => m.status !== "waiting")
     .sort((a, b) => statusRank(b.status) - statusRank(a.status))
     .slice(0, 3);
-  const improvements = [...state.metrics]
-    .filter((metric) => metric.status === "red" || metric.status === "amber")
+  const improv = [...state.metrics]
+    .filter((m) => m.status === "red" || m.status === "amber")
     .sort((a, b) => statusRank(a.status) - statusRank(b.status))
     .slice(0, 3);
 
-  const lines = [
-    { text: "MSP Benchmark Scorecard Report", size: 24, gap: 18 },
-    { text: "Personalised performance benchmark for UK and Irish MSPs", size: 12, gap: 32 },
-    { text: `Overall score: ${state.totalScore} / 100`, size: 20, gap: 12 },
-    { text: scoreInterpretation(state.totalScore, state.completedMetrics), size: 11, gap: 24 },
-    { text: "Executive summary", size: 16, gap: 10 },
-    {
-      text:
-        "This report compares your supplied MSP metrics against practical benchmark ranges across profitability, revenue quality, pricing, service efficiency, retention and security maturity.",
-      size: 10,
-      gap: 12,
-    },
-    { text: "Top 3 strengths", size: 14, gap: 8 },
-    ...listLines(strengths, (metric) => `${metric.name}: ${statusLabel(metric.status)} (${formatValue(metric.value, metric.unit)})`),
-    { text: "Top 3 improvement areas", size: 14, gap: 8 },
-    ...listLines(improvements, (metric) => `${metric.name}: ${metric.recommendation}`),
-    { text: "Category scores", size: 14, gap: 8 },
-    ...state.categoryScores.map((category) => ({
-      text: `${category.name}: ${category.score === null ? "Waiting" : `${category.score}%`} - ${categoryInterpretation(category.score)}`,
-      size: 10,
-      gap: 7,
-    })),
-    { text: "Metric results and benchmark comparison", size: 14, gap: 8 },
-    ...state.metrics.flatMap((metric) => [
-      {
-        text: `${metric.name}: ${formatValue(metric.value, metric.unit)} | ${statusLabel(metric.status)} | Benchmark: ${metric.benchmark || definitions[metric.id].benchmark}`,
-        size: 10,
-        gap: 6,
-      },
-      { text: `Guidance: ${metric.improve}`, size: 9, gap: 9 },
-    ]),
-    { text: "Want to discuss your results?", size: 14, gap: 8 },
-    {
-      text:
-        "Schedule a short benchmark review with Lorcan to identify where your MSP may be able to improve profitability, service efficiency, client value, and recurring revenue quality. Booking link: https://calendly.com/lorcan-feighery-kaseya/30min",
-      size: 10,
-      gap: 12,
-    },
-    { text: "Disclaimer / methodology note", size: 14, gap: 8 },
-    {
-      text:
-        "Benchmark guidance is directional. Some source ranges are global, self-reported, or proxy-based where UK and Ireland MSP-specific data is limited. The output should be treated as a consultative discussion aid rather than a formal valuation or audit.",
-      size: 9,
-      gap: 8,
-    },
-  ];
+  doc.setFont("helvetica", "bold"); doc.setFontSize(10); doc.setTextColor(C.navy);
+  doc.text("Top 3 Strengths", ML, y);
+  doc.text("Top 3 Areas to Develop", ML + hw + 8, y);
+  y += 6;
 
-  downloadPdfFromLines(lines, "MSP-Benchmark-Scorecard-Report.pdf");
-}
-
-function listLines(items, mapFn) {
-  if (!items.length) {
-    return [{ text: "- Waiting for more complete inputs.", size: 10, gap: 7 }];
-  }
-  return items.map((item) => ({ text: `- ${mapFn(item)}`, size: 10, gap: 7 }));
-}
-
-function downloadPdfFromLines(lines, filename) {
-  const pages = paginatePdfLines(lines);
-  const pdf = buildPdf(pages);
-  const blob = new Blob([pdf], { type: "application/pdf" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  URL.revokeObjectURL(url);
-}
-
-function paginatePdfLines(lines) {
-  const pages = [];
-  let page = [];
-  let y = 760;
-  const margin = 50;
-  const bottom = 60;
-
-  function addLine(text, size, gap) {
-    const wrapped = wrapText(text, size);
-    wrapped.forEach((line) => {
-      if (y < bottom) {
-        pages.push(page);
-        page = [];
-        y = 760;
-      }
-      page.push({ text: line, size, x: margin, y });
-      y -= size + 5;
-    });
-    y -= gap || 4;
-  }
-
-  lines.forEach((line) => addLine(sanitisePdfText(line.text), line.size || 10, line.gap || 4));
-  if (page.length) pages.push(page);
-  return pages;
-}
-
-function wrapText(text, size) {
-  const maxChars = Math.max(38, Math.floor(92 * (10 / size)));
-  const words = text.split(/\s+/);
-  const lines = [];
-  let current = "";
-  words.forEach((word) => {
-    const next = current ? `${current} ${word}` : word;
-    if (next.length > maxChars && current) {
-      lines.push(current);
-      current = word;
-    } else {
-      current = next;
+  for (let i = 0; i < Math.max(strengths.length || 1, improv.length || 1); i++) {
+    const rh = 16;
+    if (strengths[i]) {
+      const m = strengths[i];
+      rect(ML, y - 2, 2, rh, C.green);
+      rrect(ML + 2, y - 2, hw - 2, rh, 1, C.greenBg);
+      doc.setFont("helvetica", "bold"); doc.setFontSize(8); doc.setTextColor(C.text);
+      doc.text(m.name, ML + 5, y + 2.5);
+      doc.setFont("helvetica", "normal"); doc.setFontSize(7.5); doc.setTextColor(C.green);
+      doc.text(formatValue(m.value, m.unit), ML + 5, y + 8);
     }
+    if (improv[i]) {
+      const m = improv[i];
+      const x2 = ML + hw + 8;
+      rect(x2, y - 2, 2, rh, sC(m.status));
+      rrect(x2 + 2, y - 2, hw - 2, rh, 1, sBg(m.status));
+      doc.setFont("helvetica", "bold"); doc.setFontSize(8); doc.setTextColor(C.text);
+      doc.text(m.name, x2 + 5, y + 2.5);
+      doc.setFont("helvetica", "normal"); doc.setFontSize(7.5); doc.setTextColor(sC(m.status));
+      doc.text(statusLabel(m.status), x2 + 5, y + 8);
+    }
+    y += rh + 3;
+  }
+
+  // ── PAGE 2: Metric Detail ─────────────────────────────────────────────
+  doc.addPage();
+  drawHeader("Metric Results");
+  y = 26;
+
+  doc.setFont("helvetica", "bold"); doc.setFontSize(11); doc.setTextColor(C.navy);
+  doc.text("Metric Results & Benchmark Comparison", ML, y);
+  y += 8;
+
+  // Table header row
+  rect(ML, y - 4.5, CW, 7, C.navy);
+  doc.setFont("helvetica", "bold"); doc.setFontSize(7.5); doc.setTextColor(C.white);
+  doc.text("Metric", ML + 3, y);
+  doc.text("Your value", ML + 68, y);
+  doc.text("Status", ML + 108, y, { align: "center" });
+  doc.text("Benchmark target", ML + 130, y);
+  y += 6;
+
+  let alt = false;
+  for (const metric of state.metrics) {
+    if (metric.status === "waiting") continue;
+
+    const gLines = doc.splitTextToSize(sanitisePdfText(metric.improve || ""), 58);
+    const shown  = gLines.slice(0, 2);
+    const rh     = 10 + shown.length * 3.4 + 3;
+
+    if (y + rh > PH - 20) {
+      doc.addPage();
+      drawHeader("Metric Results (continued)");
+      y = 26; alt = false;
+    }
+
+    if (alt) rect(ML, y - 3, CW, rh, C.bg);
+    rect(ML, y - 3, 2.5, rh, sC(metric.status));
+
+    doc.setFont("helvetica", "bold"); doc.setFontSize(8); doc.setTextColor(C.text);
+    doc.text(metric.name, ML + 5, y + 1.5);
+
+    doc.setFont("helvetica", "normal"); doc.setFontSize(6.5); doc.setTextColor(C.muted);
+    doc.text(shown, ML + 5, y + 6);
+
+    doc.setFont("helvetica", "bold"); doc.setFontSize(9); doc.setTextColor(C.text);
+    doc.text(formatValue(metric.value, metric.unit), ML + 68, y + 1.5);
+
+    badge(statusLabel(metric.status), ML + 108, y + 4, metric.status);
+
+    doc.setFont("helvetica", "normal"); doc.setFontSize(7); doc.setTextColor(C.muted);
+    const bmk   = sanitisePdfText(metric.benchmark || definitions[metric.id].benchmark || "");
+    const bmkLn = doc.splitTextToSize(bmk, 52);
+    doc.text(bmkLn.slice(0, 2), ML + 130, y + 1.5);
+
+    y += rh + 1;
+    alt = !alt;
+  }
+
+  // ── Next Steps — new page if tight, otherwise continue ───────────────
+  const disclaimerText = "Benchmark guidance is directional. Some source ranges are global, self-reported, or proxy-based where UK and Ireland MSP-specific data is limited. Results should be treated as a consultative discussion aid rather than a formal valuation or audit.";
+  const dLines = doc.splitTextToSize(disclaimerText, CW);
+  const needH  = 20 + 46 + 15 + dLines.length * 3.4;
+
+  if (y + needH > PH - 20) { doc.addPage(); drawHeader("Next Steps"); y = 26; }
+  else { y += 10; hline(y); y += 10; }
+
+  doc.setFont("helvetica", "bold"); doc.setFontSize(11); doc.setTextColor(C.navy);
+  doc.text("Next Steps", ML, y);
+  y += 8;
+
+  // CTA box
+  rrect(ML, y, CW, 46, 3, C.scoreBg);
+  rect(ML, y, 3, 46, C.navy);
+  doc.setFont("helvetica", "bold"); doc.setFontSize(11); doc.setTextColor(C.navy);
+  doc.text("Want to discuss your results?", ML + 8, y + 10);
+  doc.setFont("helvetica", "normal"); doc.setFontSize(8.5); doc.setTextColor(C.text);
+  const ctaBody  = "Schedule a short benchmark review with Lorcan to identify where your MSP can improve profitability, service efficiency, client value, and recurring revenue quality.";
+  const ctaLines = doc.splitTextToSize(ctaBody, CW - 16);
+  doc.text(ctaLines, ML + 8, y + 18);
+  doc.setFont("helvetica", "bold"); doc.setFontSize(9); doc.setTextColor(C.navy);
+  doc.text("Book: calendly.com/lorcan-feighery-kaseya/30min", ML + 8, y + 38);
+  y += 56;
+
+  doc.setFont("helvetica", "bold"); doc.setFontSize(9); doc.setTextColor(C.text);
+  doc.text("Methodology note", ML, y);
+  y += 5;
+  doc.setFont("helvetica", "normal"); doc.setFontSize(8); doc.setTextColor(C.muted);
+  doc.text(dLines, ML, y);
+
+  // Add footers to every page
+  const totalPages = doc.getNumberOfPages();
+  for (let p = 1; p <= totalPages; p++) { doc.setPage(p); drawFooter(p, totalPages); }
+
+  doc.save("MSP-Benchmark-Scorecard-Report.pdf");
+}
+
+/* Converts an inline SVG element to a PNG data URL via canvas */
+function svgToDataUrl(svgEl, w, h) {
+  return new Promise((resolve, reject) => {
+    const s = new XMLSerializer();
+    let str = s.serializeToString(svgEl);
+    if (!str.includes("xmlns=")) str = str.replace("<svg", '<svg xmlns="http://www.w3.org/2000/svg"');
+    str = str.replace(/<svg([^>]*)>/, (_, attrs) => {
+      const clean = attrs.replace(/\s*(width|height)="[^"]*"/g, "");
+      return `<svg${clean} width="${w}" height="${h}">`;
+    });
+    const blob = new Blob([str], { type: "image/svg+xml;charset=utf-8" });
+    const url  = URL.createObjectURL(blob);
+    const img  = new Image();
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = w * 2; canvas.height = h * 2;
+      const ctx = canvas.getContext("2d");
+      ctx.scale(2, 2);
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, w, h);
+      ctx.drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(url);
+      resolve(canvas.toDataURL("image/png"));
+    };
+    img.onerror = reject;
+    img.src = url;
   });
-  if (current) lines.push(current);
-  return lines;
 }
 
 function sanitisePdfText(text) {
   return text
-    .replace(/£/g, "GBP")
     .replace(/–|—/g, "-")
     .replace(/≥/g, ">=")
     .replace(/≤/g, "<=")
-    .replace(/’/g, "'")
-    .replace(/“|”/g, '"');
-}
-
-function escapePdf(text) {
-  return text.replace(/\\/g, "\\\\").replace(/\(/g, "\\(").replace(/\)/g, "\\)");
-}
-
-function buildPdf(pages) {
-  const objects = [];
-  const fontObjectId = 3 + pages.length * 2;
-  const pageIds = [];
-
-  objects[1] = "<< /Type /Catalog /Pages 2 0 R >>";
-
-  pages.forEach((pageLines, index) => {
-    const pageId = 3 + index * 2;
-    const contentId = pageId + 1;
-    pageIds.push(pageId);
-    const stream = pageLines
-      .map((line) => `BT /F1 ${line.size} Tf ${line.x} ${line.y} Td (${escapePdf(line.text)}) Tj ET`)
-      .join("\n");
-    objects[pageId] = `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${fontObjectId} 0 R >> >> /Contents ${contentId} 0 R >>`;
-    objects[contentId] = `<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`;
-  });
-
-  objects[2] = `<< /Type /Pages /Kids [${pageIds.map((id) => `${id} 0 R`).join(" ")}] /Count ${pages.length} >>`;
-  objects[fontObjectId] = "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>";
-
-  let pdf = "%PDF-1.4\n";
-  const offsets = [0];
-  for (let i = 1; i < objects.length; i += 1) {
-    if (!objects[i]) continue;
-    offsets[i] = pdf.length;
-    pdf += `${i} 0 obj\n${objects[i]}\nendobj\n`;
-  }
-
-  const xrefStart = pdf.length;
-  pdf += `xref\n0 ${objects.length}\n`;
-  pdf += "0000000000 65535 f \n";
-  for (let i = 1; i < objects.length; i += 1) {
-    const offset = offsets[i] || 0;
-    pdf += `${String(offset).padStart(10, "0")} 00000 n \n`;
-  }
-  pdf += `trailer\n<< /Size ${objects.length} /Root 1 0 R >>\nstartxref\n${xrefStart}\n%%EOF`;
-  return pdf;
+    .replace(/'/g, "'")
+    .replace(/"|"/g, '"');
 }
 
 document.querySelectorAll(".section-toggle").forEach((button) => {
@@ -1556,20 +1706,20 @@ form.addEventListener("focusin", startScorecardProgress);
 form.addEventListener("pointerdown", startScorecardProgress);
 
 const SAMPLE_MSP = {
-  annualRevenue: 2800000,
-  employees: 22,
-  technicians: 11,
-  grossMargin: 33,
-  ebitdaMargin: 10,
-  recurringRevenue: 71,
-  mrr: 175000,
-  supportedUsers: 2100,
-  activeClients: 38,
-  endpoints: 2200,
-  tickets: 1540,
-  logoChurn: 9,
-  servicesPerClient: 3.8,
-  securityAttach: 45,
+  annualRevenue: 1600000,   // Small MSP — under £2m
+  employees: 14,
+  technicians: 7,
+  grossMargin: 48,          // Strong (≥42%)
+  ebitdaMargin: 16,         // Strong (≥15%)
+  recurringRevenue: 68,     // Strong (≥60%)
+  mrr: 92000,
+  supportedUsers: 950,
+  activeClients: 26,
+  endpoints: 560,           // Endpoints/tech = 80 → Developing
+  tickets: 490,             // Tickets/endpoint = 0.875 → Developing
+  logoChurn: 7,             // Strong (<10%)
+  servicesPerClient: 3.2,   // Developing (2–3.9)
+  securityAttach: 32,       // Below benchmark (<40%) — clear improvement area
 };
 
 function loadSampleMsp() {
@@ -1589,7 +1739,130 @@ function clearAllValues() {
 
 document.getElementById("loadSample").addEventListener("click", loadSampleMsp);
 document.getElementById("clearAll").addEventListener("click", clearAllValues);
-document.getElementById("copySummary").addEventListener("click", copySummary);
-document.getElementById("downloadPdf").addEventListener("click", generateReportPdf);
+document.getElementById("downloadPdf").addEventListener("click", async function() {
+  const btn = this;
+  const original = btn.textContent;
+  btn.textContent = "Generating…";
+  btn.disabled = true;
+  try {
+    await generateReportPdf();
+  } finally {
+    btn.textContent = original;
+    btn.disabled = false;
+  }
+});
+
+/* ── Lead-capture modal ───────────────────────────────────────────────── */
+(function () {
+  const FORMSPREE_ID = "xredlnly";
+  const PDF_PATH = "assets/msp-metrics-playbook.pdf";
+
+  const overlay  = document.getElementById("playbookModal");
+  const closeBtn = document.getElementById("modalClose");
+  const form     = document.getElementById("playbookForm");
+  const submitBtn = document.getElementById("playbookSubmit");
+  const errorBox = document.getElementById("modalError");
+  const formWrap = document.getElementById("modalFormWrap");
+  const successEl = document.getElementById("modalSuccess");
+
+  const nameField    = document.getElementById("playbookName");
+  const emailField   = document.getElementById("playbookEmail");
+  const companyField = document.getElementById("playbookCompany");
+
+  function checkFields() {
+    const allFilled =
+      nameField.value.trim() !== "" &&
+      emailField.value.trim() !== "" &&
+      companyField.value.trim() !== "";
+    submitBtn.disabled = !allFilled;
+  }
+
+  [nameField, emailField, companyField].forEach((el) =>
+    el.addEventListener("input", checkFields)
+  );
+
+  function openModal() {
+    overlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+    // reset to form view each time it opens
+    formWrap.hidden = false;
+    successEl.hidden = true;
+    errorBox.hidden = true;
+    submitBtn.textContent = "Download now";
+    checkFields(); // re-evaluate based on current field values
+  }
+
+  function closeModal() {
+    overlay.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  // Intercept all links that point at the playbook PDF
+  document.querySelectorAll('a[href*="msp-metrics-playbook.pdf"]').forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      openModal();
+    });
+  });
+
+  closeBtn.addEventListener("click", closeModal);
+
+  // Close on backdrop click
+  overlay.addEventListener("click", function (e) {
+    if (e.target === overlay) closeModal();
+  });
+
+  // Close on Escape
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && overlay.classList.contains("open")) closeModal();
+  });
+
+  function triggerDownload() {
+    const a = document.createElement("a");
+    a.href = PDF_PATH;
+    a.download = "MSP-Metrics-Playbook.pdf";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    errorBox.hidden = true;
+
+    const name    = document.getElementById("playbookName").value.trim();
+    const email   = document.getElementById("playbookEmail").value.trim();
+    const company = document.getElementById("playbookCompany").value.trim();
+
+    if (!name || !email || !company) return; // browser validation handles empty fields
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending…";
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: "POST",
+        headers: { "Accept": "application/json", "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, company,
+          _subject: "MSP Metrics Playbook download request" }),
+      });
+
+      if (res.ok) {
+        // Show success, trigger PDF download
+        formWrap.hidden = true;
+        successEl.hidden = false;
+        triggerDownload();
+        // Auto-close after 4 s
+        setTimeout(closeModal, 4000);
+      } else {
+        throw new Error("non-ok response");
+      }
+    } catch (_) {
+      submitBtn.textContent = "Download now";
+      checkFields(); // re-enable only if fields still filled
+      errorBox.hidden = false;
+    }
+  });
+})();
 
 update();
