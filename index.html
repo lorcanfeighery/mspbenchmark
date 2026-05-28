@@ -3,8 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MSP Benchmark Scorecard</title>
-    <link rel="stylesheet" href="styles.css?v=7" />
+    <title>MSP Benchmark Scorecard | UK &amp; Ireland</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Benchmark your MSP against top-performing UK &amp; Irish providers across profitability, revenue quality, pricing, efficiency, retention, and security maturity." />
+
+    <!-- Open Graph / social preview -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="MSP Benchmark Scorecard | UK &amp; Ireland" />
+    <meta property="og:description" content="See how your MSP stacks up across 14 key metrics. Free, instant, no login required." />
+    <meta property="og:site_name" content="MSP Benchmark Scorecard" />
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="MSP Benchmark Scorecard | UK &amp; Ireland" />
+    <meta name="twitter:description" content="See how your MSP stacks up across 14 key metrics. Free, instant, no login required." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+    <link rel="stylesheet" href="styles.css?v=17" />
   </head>
   <body>
     <header class="topbar">
@@ -38,6 +56,9 @@
           </div>
           <p class="trust-note">
             No login required. No contact details required. Your results are generated instantly.
+          </p>
+          <p class="scope-note">
+            Best suited for MSPs with recurring managed service revenue. Some metrics may be less relevant for project-heavy IT consultancies, break-fix providers, or very early-stage MSPs.
           </p>
         </div>
         <aside class="hero-panel" aria-label="Benchmark preview">
@@ -82,6 +103,13 @@
               submitted to a server.
             </span>
           </div>
+          <div class="disclaimer-note">
+            <strong>Disclaimer</strong>
+            <span>
+              This tool is for general benchmarking and business discussion only. It is not
+              financial, accounting, tax, legal, or valuation advice.
+            </span>
+          </div>
 
           <div class="progress-card">
             <div>
@@ -89,6 +117,18 @@
               <strong id="progressLabel">0 of 15 inputs</strong>
             </div>
             <div class="progress-track" aria-hidden="true"><span id="progressBar"></span></div>
+          </div>
+
+          <div class="size-band-primer">
+            <div class="size-band-primer-text">
+              <strong>Start here — what size is your MSP?</strong>
+              <span>This sets the benchmark thresholds used throughout the scorecard. It will auto-update when you enter your annual revenue below, but you can set it manually now.</span>
+            </div>
+            <select id="sizeBand">
+              <option value="small">Small — under £2m annual revenue</option>
+              <option value="mid">Mid-sized — £2m to £10m annual revenue</option>
+              <option value="large">Larger — £10m+ annual revenue</option>
+            </select>
           </div>
 
           <form id="benchmarkForm" novalidate>
@@ -114,15 +154,6 @@
                     <small>Engineers, service desk, project delivery and technical delivery roles.</small>
                     <input id="technicians" inputmode="numeric" type="number" min="0" step="1" placeholder="e.g. 12" />
                   </label>
-                  <label>
-                    <span>MSP size band</span>
-                    <small>Auto-selected from revenue, but you can override it.</small>
-                    <select id="sizeBand">
-                      <option value="small">Small MSP: under £2m annual revenue</option>
-                      <option value="mid">Mid-sized MSP: £2m to £10m annual revenue</option>
-                      <option value="large">Larger MSP: £10m+ annual revenue</option>
-                    </select>
-                  </label>
                 </div>
               </div>
             </section>
@@ -135,19 +166,46 @@
               <div class="section-body">
                 <div class="field-grid">
                   <label>
-                    <span>Gross margin %</span>
+                    <span class="field-label-row">
+                      Gross margin %
+                      <span class="metric-info">
+                        <button class="info-button" type="button" aria-label="How to calculate gross margin">i</button>
+                        <span class="info-popover" role="tooltip">
+                          <strong>How to calculate</strong>
+                          <span>(Revenue minus cost of goods sold) divided by revenue, multiplied by 100. For the most accurate figure, include service labour, technician wages, and direct tool or platform costs in COGS — not just hardware and licences.</span>
+                        </span>
+                      </span>
+                    </span>
                     <small>Include service labour and tool costs in COGS where possible.</small>
                     <input id="grossMargin" inputmode="decimal" type="number" min="0" max="100" step="0.1" placeholder="e.g. 41" />
                     <div class="input-hint" id="hint-grossMargin"></div>
                   </label>
                   <label>
-                    <span>EBITDA / net profit margin %</span>
-                    <small>Use adjusted EBITDA or net profit margin if EBITDA is unavailable.</small>
+                    <span class="field-label-row">
+                      EBITDA / net profit margin %
+                      <span class="metric-info">
+                        <button class="info-button" type="button" aria-label="How to calculate EBITDA margin">i</button>
+                        <span class="info-popover" role="tooltip">
+                          <strong>How to calculate</strong>
+                          <span>EBITDA (or adjusted net profit) divided by annual revenue, multiplied by 100. If formal EBITDA is unavailable, net profit margin is a reasonable substitute. Where an owner draws a salary above a typical market rate, adding back the excess gives a more comparable figure.</span>
+                        </span>
+                      </span>
+                    </span>
+                    <small>Use adjusted EBITDA or net profit margin if EBITDA is unavailable. Comparisons using net profit rather than adjusted EBITDA are approximate.</small>
                     <input id="ebitdaMargin" inputmode="decimal" type="number" min="0" max="100" step="0.1" placeholder="e.g. 16" />
                     <div class="input-hint" id="hint-ebitdaMargin"></div>
                   </label>
                   <label>
-                    <span>Recurring revenue %</span>
+                    <span class="field-label-row">
+                      Recurring revenue %
+                      <span class="metric-info">
+                        <button class="info-button" type="button" aria-label="How to calculate recurring revenue %">i</button>
+                        <span class="info-popover" role="tooltip">
+                          <strong>How to calculate</strong>
+                          <span>Annual recurring revenue divided by total annual revenue, multiplied by 100. Include all contracted monthly and annual managed service fees. Exclude one-off project revenue, ad-hoc support, and hardware or software resale.</span>
+                        </span>
+                      </span>
+                    </span>
                     <small>Annual recurring revenue as a share of total revenue.</small>
                     <input id="recurringRevenue" inputmode="decimal" type="number" min="0" max="100" step="0.1" placeholder="e.g. 68" />
                     <div class="input-hint" id="hint-recurringRevenue"></div>
@@ -164,7 +222,16 @@
               <div class="section-body">
                 <div class="field-grid">
                   <label>
-                    <span>Monthly recurring revenue</span>
+                    <span class="field-label-row">
+                      Monthly recurring revenue
+                      <span class="metric-info">
+                        <button class="info-button" type="button" aria-label="How to calculate monthly recurring revenue">i</button>
+                        <span class="info-popover" role="tooltip">
+                          <strong>How to calculate</strong>
+                          <span>Sum of all active contracted monthly recurring fees across your managed service agreements. Exclude one-off project invoices, ad-hoc support calls, and hardware or software resale. For annual contracts, divide the annual fee by 12.</span>
+                        </span>
+                      </span>
+                    </span>
                     <small>Current contracted monthly recurring revenue.</small>
                     <input id="mrr" inputmode="decimal" type="number" min="0" step="100" placeholder="e.g. 225000" />
                   </label>
@@ -244,7 +311,16 @@
               <div class="section-body">
                 <div class="field-grid">
                   <label>
-                    <span>Managed endpoints</span>
+                    <span class="field-label-row">
+                      Managed endpoints
+                      <span class="metric-info">
+                        <button class="info-button" type="button" aria-label="What counts as a managed endpoint">i</button>
+                        <span class="info-popover" role="tooltip">
+                          <strong>What to count</strong>
+                          <span>Include workstations, laptops, and servers under active monitoring and management agreements. You can also include managed network devices such as firewalls and switches if they are consistently tracked. Exclude any devices not covered by a managed service agreement.</span>
+                        </span>
+                      </span>
+                    </span>
                     <small>Workstations, servers and other managed endpoint assets.</small>
                     <input id="endpoints" inputmode="numeric" type="number" min="0" step="1" placeholder="e.g. 2450" />
                   </label>
@@ -269,23 +345,48 @@
               <div class="section-body">
                 <div class="field-grid">
                   <label>
-                    <span>Annual logo churn %</span>
+                    <span class="field-label-row">
+                      Annual logo churn %
+                      <span class="metric-info">
+                        <button class="info-button" type="button" aria-label="How to calculate annual logo churn">i</button>
+                        <span class="info-popover" role="tooltip">
+                          <strong>How to calculate</strong>
+                          <span>Number of clients lost in the last 12 months divided by the number of clients at the start of that period, multiplied by 100. Count only full client losses — not clients who reduced their agreement scope.</span>
+                        </span>
+                      </span>
+                    </span>
                     <small>Percentage of clients lost over the last 12 months.</small>
                     <input id="logoChurn" inputmode="decimal" type="number" min="0" max="100" step="0.1" placeholder="e.g. 7" />
                     <div class="input-hint" id="hint-logoChurn"></div>
                   </label>
                   <label>
-                    <span>Average services per client</span>
+                    <span class="field-label-row">
+                      Average services per client
+                      <span class="metric-info">
+                        <button class="info-button" type="button" aria-label="How to calculate average services per client">i</button>
+                        <span class="info-popover" role="tooltip">
+                          <strong>How to calculate</strong>
+                          <span>Total distinct recurring service lines divided by active clients. Count service categories, not individual licences. Examples of distinct services: managed IT support, backup/BCDR, endpoint security (EDR/MDR), managed email security, security awareness training, vulnerability scanning, compliance support, vCIO/QBR, cloud management, dark web monitoring. A client using all their security tools as one bundled service counts as one service, not five.</span>
+                        </span>
+                      </span>
+                    </span>
                     <small>Average number of recurring services used by each client.</small>
                     <input id="servicesPerClient" inputmode="decimal" type="number" min="0" step="0.1" placeholder="e.g. 4.5" />
                     <div class="input-hint" id="hint-servicesPerClient"></div>
                   </label>
                   <label>
-                    <span>Security attach rate %</span>
+                    <span class="field-label-row">
+                      Security attach rate %
+                      <span class="metric-info">
+                        <button class="info-button" type="button" aria-label="How to calculate security attach rate">i</button>
+                        <span class="info-popover" role="tooltip">
+                          <strong>How to calculate</strong>
+                          <span>Clients using at least one managed security service divided by total active clients, multiplied by 100. Qualifying services include EDR or MDR, managed email security, backup or BCDR, security awareness training, and vulnerability scanning. A client only needs one to count.</span>
+                        </span>
+                      </span>
+                    </span>
                     <small>
-                      Clients using one or more managed security services such as EDR/MDR, email
-                      security, backup/BCDR, security awareness training, vulnerability scanning,
-                      or similar.
+                      Clients with at least one recurring managed security service beyond basic helpdesk — such as EDR/MDR, managed email security, backup/BCDR, security awareness training, vulnerability scanning, or compliance monitoring. Basic antivirus alone does not qualify.
                     </small>
                     <input id="securityAttach" inputmode="decimal" type="number" min="0" max="100" step="0.1" placeholder="e.g. 64" />
                     <div class="input-hint" id="hint-securityAttach"></div>
@@ -314,6 +415,11 @@
             The dashboard compares your current inputs against practical benchmark ranges for
             UK and Irish MSPs. It is designed as a discussion aid, not a rigid audit.
           </p>
+          <p class="results-caveat">
+            Benchmarks are directional and intended as a business discussion aid, not a formal audit.
+            Some ranges are based on global MSP benchmarks or proxy data where UK/Ireland-specific
+            data is limited.
+          </p>
         </div>
 
         <div class="score-grid">
@@ -338,7 +444,6 @@
         <div class="actions-row">
           <button class="button primary" id="downloadPdf" type="button">Download my benchmark report</button>
           <a class="button secondary" href="/assets/msp-metrics-playbook.pdf" download>Download Full MSP Metrics Playbook</a>
-          <button class="button secondary" id="copySummary" type="button">Copy summary</button>
         </div>
         <p class="supporting-copy">
           For the full methodology, benchmark detail, and source notes, download the complete MSP
@@ -383,6 +488,48 @@
       </section>
     </main>
 
+    <!-- Playbook lead capture modal -->
+    <div class="modal-overlay" id="playbookModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-card">
+        <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+
+        <div id="modalFormWrap">
+          <p class="eyebrow">MSP Metrics Playbook</p>
+          <h2 id="modalTitle">Get the full playbook</h2>
+          <p class="modal-desc">
+            Enter your details and your download will start immediately. Lorcan will also follow
+            up with a copy by email.
+          </p>
+          <form id="playbookForm" novalidate>
+            <!-- Formspree spam honeypot -->
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+            <input type="hidden" name="_subject" value="MSP Metrics Playbook download request" />
+            <label>
+              <span>Your name</span>
+              <input type="text" name="name" id="playbookName" placeholder="e.g. Jane Smith" required autocomplete="name" />
+            </label>
+            <label>
+              <span>Work email</span>
+              <input type="email" name="email" id="playbookEmail" placeholder="e.g. jane@yourmsp.com" required autocomplete="email" />
+            </label>
+            <label>
+              <span>Business name</span>
+              <input type="text" name="company" id="playbookCompany" placeholder="e.g. Acme IT Services" required autocomplete="organization" />
+            </label>
+            <p class="modal-error" id="modalError" hidden>Something went wrong — please try again or email <a href="mailto:lorcan.feighery@kaseya.com">lorcan.feighery@kaseya.com</a> directly.</p>
+            <button class="button primary full" id="playbookSubmit" type="submit" disabled>Download now</button>
+            <p class="modal-privacy">Your details will only be used to send you the playbook and follow up if relevant. No spam, ever.</p>
+          </form>
+        </div>
+
+        <div class="modal-success" id="modalSuccess" hidden>
+          <div class="modal-success-icon">✓</div>
+          <strong>You're all set — your download is starting.</strong>
+          <p>Lorcan will also be in touch with a copy by email shortly.</p>
+        </div>
+      </div>
+    </div>
+
     <footer>
       <p>
         Benchmark guidance is directional and based on recognised MSP operating benchmarks. Some
@@ -391,6 +538,7 @@
       </p>
     </footer>
 
-    <script src="app.js?v=10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="app.js?v=20"></script>
   </body>
 </html>
